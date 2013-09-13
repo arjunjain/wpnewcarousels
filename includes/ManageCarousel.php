@@ -206,7 +206,6 @@ class ManageCarousel{
 							<th class="manage-column column-author" scope="col">Carousel Width</th>
 							<th class="manage-column column-author" scope="col">Carousel Height</th>
 							<th class="manage-column column-author" scope="col">Carousel Effect</th>
-							<th class="manage-column column-author" scope="col">Starting slide</th>
 							<th class="manage-column column-author" scope="col">Animation speed</th>
 							<th class="manage-column column-author" scope="col">Pause time</th>
 							<th class="manage-column column-author" scope="col">Navigation icons</th>
@@ -230,7 +229,6 @@ class ManageCarousel{
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->CarouselWidth.'</a></td>
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->CarouselHeight.'</a></td>
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->CarouselEffect.'</a></td>
-							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->StartSlide.'</a></td>
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->AnimationSpeed.'</a></td>
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->PauseTime.'</a></td>						
 							<td class="author column-author"><a href="?page=add-new-wpnewcarousel&edit=1&rid='.$carousel->Id.'">'.$carousel->ShowNav.'</a></td>	
@@ -240,7 +238,7 @@ class ManageCarousel{
 		$html .='	</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="10"class="manage-column column-title" style="text-align:right !important;" scope="col">Find Bug or suggest new feature please <a target="_blank" href="http://www.arjunjain.info/contact">click here</a></th>
+							<th colspan="9"class="manage-column column-title" style="text-align:right !important;" scope="col">Find Bug or suggest new feature please <a target="_blank" href="http://www.arjunjain.info/contact">click here</a></th>
 						</tr>
 					</tfoot>
 				</table>
@@ -254,10 +252,11 @@ class ManageCarousel{
 	 * @param string $errormsg
 	 */
 	public function DisplayAddNewCarousel($postdata=array(),$errormsg=''){
-		if(@$postdata['carouselid']==0)
-		$buttontext="Add new carousel";
+		if(isset($postdata['carouselid']) && ($postdata['carouselid']==0))
+			$buttontext="Add new carousel";
 		else 
-		$buttontext="Update carousel";
+			$buttontext="Update carousel";
+		
 		$anims = array(	'random'=>'Random',
 						'sliceDown'=>'SliceDown',
 						'sliceDownRight'=>'Slicedownright',
@@ -286,6 +285,7 @@ class ManageCarousel{
 		   				<form action="'.esc_attr($_SERVER['REQUEST_URI']).'" method="POST" name="carouselform">
 							<input type="hidden" name="carouselid" value="'.@$postdata['carouselid'].'" />
 							<input type="hidden" name="oldcarouselname" value="'.@$postdata['oldcarouselname'].'" />
+							<input type="hidden" id="startslide" name="startslide" value="0" />
 							<tbody>
 							<table class="form-table" style="margin-top:0px;">
 								<tr>
@@ -307,17 +307,11 @@ class ManageCarousel{
 			  	
 			  	foreach ($anims as $key=>$value){
 			  		$html .= '<option value="'.$key.'" ';
-			  		if($key== @$postdata['carouseleffect'])
+			  		if(isset($postdata['carouseleffect']) && ($key== $postdata['carouseleffect']))
 			  			$html .= 'selected="selected"';
 			  		$html .='>'.$value.'</option>';								
 			  	}
 			  	$html .=				'</select><p class="description">Default value Random</p>
-			  						</th>
-			  					</tr>
-			  					<tr>
-			  						<th scope="row"><label for="startslide" >Starting Slide</th>
-			  						<th><input type="text" id="startslide" name="startslide" value="'.@$postdata['startslide'].'" class="small-text" />
-			  							<p class="description">Default value 0</p>
 			  						</th>
 			  					</tr>
 			  					<tr>
@@ -338,7 +332,7 @@ class ManageCarousel{
 										<select name="shownav">';
 				foreach ($truefalse as $key=>$value){
 					$html .= "<option value='$key' ";
-					if($key==@$postdata['shownav'])
+					if( isset($postdata['shownav']) && ($key==$postdata['shownav']))
 						$html .= 'selected="selected"';
 					$html .= ">$value</option>";
 				}
@@ -351,7 +345,7 @@ class ManageCarousel{
 										<select name="hoverpause">';
 				foreach ($truefalse as $key=>$value){
 					$html .= "<option value='$key' ";
-					if($key==@$postdata['hoverpause'])
+					if(isset($postdata['hoverpause']) && ($key==$postdata['hoverpause']))
 						$html .= 'selected="selected"';
 					$html .= ">$value</option>";
 				}
