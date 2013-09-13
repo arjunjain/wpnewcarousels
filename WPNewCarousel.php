@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/
 Description: Provide functionality to create carousel that can be inserted to any wordpress page.
 Author: Arjun Jain
 Author URI: http://www.arjunjain.info
-Version: 1.5
+Version: 1.6
 */
 
 global $wpnewcarousel_db_version;
@@ -129,19 +129,21 @@ function WPNewCarouselAddImages(){
 			$BackgroundImageURL=$_POST['BackgroundImageURL'];
 			$BackgroundImageLink=$_POST['BackgroundImageLink'];
 			$BackgroudImageAltText=$_POST['BackgroundImageAltText'];
-			$TitleText=$_POST['TitleText'];			
+			$TitleText=$_POST['TitleText'];
+			$slideDisplayOrder = $_POST['position'];
+			
 			for($i=0;$i<sizeof($Id);$i++){
 				if($Id[$i] !=""){
 					// update 
 					if(trim($BackgroundImageURL[$i])=="")  // delete carousel if image url if empty
 						$mcObject->DeleteCarouselSlides($Id[$i]);
 					else
-						$mcObject->UpdateCarouselSlides($Id[$i], $carouselId, trim($BackgroundImageURL[$i]), trim($BackgroundImageLink[$i]), trim($BackgroudImageAltText[$i]), trim($TitleText[$i]));
+						$mcObject->UpdateCarouselSlides($Id[$i], $carouselId, trim($BackgroundImageURL[$i]), trim($BackgroundImageLink[$i]), trim($BackgroudImageAltText[$i]), trim($TitleText[$i]), $slideDisplayOrder[$i]);
 				}
 				else{
 					//add
 					if(trim($BackgroundImageURL[$i])!="")
-						$mcObject->InsertCarouselSlides($carouselId, trim($BackgroundImageURL[$i]),trim($BackgroundImageLink[$i]),trim($BackgroudImageAltText[$i]), trim($TitleText[$i]));		
+						$mcObject->InsertCarouselSlides($carouselId, trim($BackgroundImageURL[$i]),trim($BackgroundImageLink[$i]),trim($BackgroudImageAltText[$i]), trim($TitleText[$i]), $slideDisplayOrder[$i]);		
 				}
 			}	
 			$msg='<div class="updated"><p>Carousel Updated</a></p></div>';
@@ -299,7 +301,7 @@ add_action( 'wp_print_styles', 'WPNewCarousel_Styles' );
 function wpnewcarousel_script() {
 	wp_enqueue_script('jquery');
 	wp_register_script( 'wpnewcarousel_script',path_join( WP_PLUGIN_URL, basename( dirname( __FILE__ ) ) .'/js/jquery.nivo.slider.js' ) , array('jquery') );
-	wp_enqueue_script('wpnewcarousel_script');
+	wp_enqueue_script('wpnewcarousel_script');	
 }
 function WPNewCarousel_Styles() {
 	wp_enqueue_style( 'WPNewCarousel_Styles',
@@ -317,6 +319,8 @@ if (isset($_GET['page']) && $_GET['page'] == 'wpnewcarousel-add-image'){
 	add_action('admin_print_styles', 'wpnewcarousel_admin_styles');
 }
 function wpnewcarousel_admin_scripts() {
+	wp_enqueue_script('jquery-ui-core');
+	wp_enqueue_script('jquery-ui-sortable');
 	wp_enqueue_script('media-upload');
 	wp_enqueue_script('thickbox');
 	wp_register_script('wc-upload',path_join( WP_PLUGIN_URL,basename( dirname( __FILE__ )).'/js/upload-script.js'),array('jquery','media-upload','thickbox'));

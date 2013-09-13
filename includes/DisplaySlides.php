@@ -1,7 +1,7 @@
 <?php
 /**
  * @author  Arjun Jain  < http://www.arjunjain.info >
- * @version 1.5
+ * @version 1.6
  * @license GNU GENERAL PUBLIC LICENSE Version 3
  */
 require_once '../../../../wp-load.php';

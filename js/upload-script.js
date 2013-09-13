@@ -2,7 +2,7 @@
  * @author   Arjun Jain ( http://www.arjunjain.info ) 
  * @license  GNU GENERAL PUBLIC LICENSE Version 3
  * @since    1.4
- * @version  1.5
+ * @version  1.6
  */
 
 jQuery(document).ready(function() {
