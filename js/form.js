@@ -14,9 +14,17 @@ function addSlides(em,filepath){
 			url:filepath,  
 			data:"pcount="+count,
 			success: function(data){
-				var curdata=document.getElementById("ajaxslide").innerHTML;
-				document.getElementById("ajaxslide").innerHTML=curdata+data;
+				jQuery("#ajaxslide").append(data);
+				var get = jQuery(".slide-carousal").length - 1;
+				for(i = count;i > 0;i--)
+				{
+					jQuery(jQuery(".slide-carousal")[get]).attr("id","slide-"+get);
+					jQuery(jQuery(".slide-carousal")[get]).find(".position-fixer").attr("value",get);
+					get--;
+				}
 			}
+			//	var curdata=document.getElementById("ajaxslide").innerHTML;
+			//	document.getElementById("ajaxslide").innerHTML=curdata+data;
 		});
 		return false;
 }
