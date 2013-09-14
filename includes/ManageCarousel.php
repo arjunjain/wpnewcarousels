@@ -309,7 +309,6 @@ class ManageCarousel{
 		   				<form action="'.esc_attr($_SERVER['REQUEST_URI']).'" method="POST" name="carouselform">
 							<input type="hidden" name="carouselid" value="'.@$postdata['carouselid'].'" />
 							<input type="hidden" name="oldcarouselname" value="'.@$postdata['oldcarouselname'].'" />
-							<input type="hidden" id="startslide" name="startslide" value="0" />
 							<tbody>
 							<table class="form-table" style="margin-top:0px;">
 								<tr>
@@ -336,6 +335,12 @@ class ManageCarousel{
 			  		$html .='>'.$value.'</option>';								
 			  	}
 			  	$html .=				'</select><p class="description">Default value Random</p>
+			  						</th>
+			  					</tr>
+			  					<tr>
+			  						<th scope="row"><label for="startslide" >Starting Slide</th>
+			  						<th><input type="text" id="startslide" name="startslide" value="'.@$postdata['startslide'].'" class="small-text" />
+			  							<p class="description">Default value 0</p>
 			  						</th>
 			  					</tr>
 			  					<tr>
