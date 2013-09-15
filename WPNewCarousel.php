@@ -9,7 +9,7 @@ Version: 1.6
 */
 
 global $wpnewcarousel_db_version;
-$wpnewcarousel_db_version="1.1";   // Updata database version  @since 1.5
+$wpnewcarousel_db_version="1.2"; 
 $olderversion=get_option('wpnewcarousel_db_version');   // find current version stored in database
 
 /**
@@ -425,11 +425,13 @@ function WPNewCarousels_activate(){
 /**
  * Update database < major changes from version 1.4 to 1.5 >
  * @since 1.5
+ * @version 1.6
  */
 add_action('plugins_loaded', 'wpnewcarousel_update_db_check');
 function wpnewcarousel_update_db_check() {
 	global $wpdb,$wpnewcarousel_db_version,$olderversion;
-	if ( $olderversion != $wpnewcarousel_db_version) {
+	
+	if($olderversion == '1.1'){
 		if (function_exists('is_multisite') && is_multisite()) {
 			if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
 				$old_blog = $wpdb->blogid;
@@ -437,21 +439,47 @@ function wpnewcarousel_update_db_check() {
 				foreach ($blogids as $blog_id) {
 					switch_to_blog($blog_id);
 					$mcObject=new ManageCarousel();
-					$mcObject->UpdateTable();
+					$mcObject->UpdateTable_AddWeight();
 				}
 				switch_to_blog($old_blog);
 				return;
 			}
 			else{
 				$mcObject=new ManageCarousel();
-				$mcObject->UpdateTable();
+				$mcObject->UpdateTable_AddWeight();
 			}
 		}
 		else{
 			$mcObject=new ManageCarousel();
-			$mcObject->UpdateTable();
+			$mcObject->UpdateTable_AddWeight();
 		}
-		update_option('wpnewcarousel_db_version', $wpnewcarousel_db_version); // update database version from 1.0 to 1.1
+		update_option('wpnewcarousel_db_version', $wpnewcarousel_db_version); // update database version from 1.1 to 1.2
+	}
+	else{
+		if ( $olderversion != $wpnewcarousel_db_version) {
+			if (function_exists('is_multisite') && is_multisite()) {
+				if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
+					$old_blog = $wpdb->blogid;
+					$blogids = $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM $wpdb->blogs"));
+					foreach ($blogids as $blog_id) {
+						switch_to_blog($blog_id);
+						$mcObject=new ManageCarousel();
+						$mcObject->UpdateTable();
+					}
+					switch_to_blog($old_blog);
+					return;
+				}
+				else{
+					$mcObject=new ManageCarousel();
+					$mcObject->UpdateTable();
+				}
+			}
+			else{
+				$mcObject=new ManageCarousel();
+				$mcObject->UpdateTable();
+			}
+			update_option('wpnewcarousel_db_version', $wpnewcarousel_db_version); // update database version from 1.0 to 1.1
+		}
 	}
 }
 ?>

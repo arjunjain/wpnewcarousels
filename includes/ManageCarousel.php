@@ -58,7 +58,6 @@ class ManageCarousel{
 			}
 			else{
 				for($i=0;$i<3;$i++){
-//					$html .=$this->getSlide();
 					$html .=$this->getInitialSLides($i);
 				}
 			}	
@@ -568,6 +567,7 @@ class ManageCarousel{
 				  ."BackgroundImageLink varchar(255) DEFAULT NULL,"
 				  ."BackgroundImageAltText varchar(255) DEFAULT NULL,"
 				  ."TitleText varchar(255) DEFAULT NULL,"
+  				  ."weight int(3) DEFAULT 0,"
 				  ."FOREIGN KEY (CarouselId) REFERENCES $this->_carouselTable(Id) ON UPDATE CASCADE ON DELETE CASCADE,"
 				  ."PRIMARY KEY (Id,CarouselId))ENGINE=INNODB;";
 			require_once ABSPATH.'wp-admin/includes/upgrade.php';
@@ -587,6 +587,11 @@ class ManageCarousel{
 			$this->_DataObject->query("DROP TABLE {$olddatatablenamelinux}");
 			$this->_DataObject->query("DROP TABLE {$oldmaintablenamelinux}");
 		}
+	}
+	
+	public function UpdateTable_AddWeight(){
+		$sql="ALTER TABLE {$this->_carouselData} ADD `weight` INT(3) NULL DEFAULT '0'";
+		$this->_DataObject->query($sql);
 	}
 	
 	public function CreateTable(){
@@ -615,7 +620,7 @@ class ManageCarousel{
 				 ."BackgroundImageLink varchar(255) DEFAULT NULL,"
 				 ."BackgroundImageAltText varchar(255) DEFAULT NULL,"
 				 ."TitleText varchar(255) DEFAULT NULL,"
-				 ."weight int(3) DEFAULT NULL,"
+				 ."weight int(3) DEFAULT 0,"
 				 ."FOREIGN KEY (CarouselId) REFERENCES $this->_carouselTable(Id) ON UPDATE CASCADE ON DELETE CASCADE,"
 				 ."PRIMARY KEY (Id,CarouselId))ENGINE=INNODB;";			
 		}
