@@ -68,7 +68,7 @@ class ManageCarousel{
 								<input type="hidden" name="carouselid" value="'.$carouselid.'"><input type="submit" class="button" style="padding:3px 8px;" name="saveCarousel" value="Save" id="slides-save-button"/></form>
 								or 
 								<form style="display:inline;" name="addmoreslideform" method="POST" onsubmit="return addSlides(this,\''.plugins_url('includes/DisplaySlides.php',dirname(__FILE__)).'\');">
-					 				<input type="text" value="1" maxlength="1" size="1" name="numberofslideadd"  style="height:24px; width:30px">
+					 				<input type="text" value="1" maxlength="1" size="1" name="numberofslideadd"  style="height:24px; width:30px; text-align:center">
 									<input type="submit" class="button" style="padding:3px 8px;" name="addmoreslides" value="Add" />
 								</form>
 							</th>
@@ -573,10 +573,10 @@ class ManageCarousel{
 			require_once ABSPATH.'wp-admin/includes/upgrade.php';
 			dbDelta($sql);
 		 	if($this->_DataObject->get_var("SHOW TABLES LIKE '{$olddatatablenamewindow}'") == $olddatatablenamewindow){
-				$this->_DataObject->query("INSERT INTO {$this->_carouselData} SELECT * FROM {$olddatatablenamewindow}");
+				$this->_DataObject->query("INSERT INTO $this->_carouselData(Id,CarouselId,BackgroundImageURL,BackgroundImageLink,BackgroundImageAltText,TitleText) SELECT * FROM {$olddatatablenamewindow}");
 			}
 			else if($this->_DataObject->get_var("SHOW TABLES LIKE '{$olddatatablenamelinux}'") == $olddatatablenamelinux){
-				$this->_DataObject->query("INSERT INTO {$this->_carouselData} SELECT * FROM {$olddatatablenamelinux}");
+				$this->_DataObject->query("INSERT INTO $this->_carouselData(Id,CarouselId,BackgroundImageURL,BackgroundImageLink,BackgroundImageAltText,TitleText) SELECT * FROM {$olddatatablenamelinux}");
 			}
 		}
 		if($this->_DataObject->get_var("SHOW TABLES LIKE '{$olddatatablenamewindow}'") == $olddatatablenamewindow){
