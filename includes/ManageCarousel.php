@@ -261,7 +261,7 @@ class ManageCarousel{
 		$html .='	</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="9"class="manage-column column-title" style="text-align:right !important;" scope="col">Find Bug or suggest new feature please <a target="_blank" href="http://www.arjunjain.info/contact">click here</a></th>
+							<th colspan="9"class="manage-column column-title" style="text-align:right !important;" scope="col">Find Bug? <a target="_blank" href="https://github.com/arjunjain/wpnewcarousels/wiki">Create new issue</a></th>
 						</tr>
 					</tfoot>
 				</table>

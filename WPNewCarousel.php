@@ -188,12 +188,12 @@ function WPNewCarouselShortcode($atts){
 		'name' => '',
 	    'width' =>'',
 		'height' =>'',
-		'startslide'=>'1',
-		'animationspeed'=>'500',
-		'imagepausetime'=>'3000',
-		'shownav'=>'true',
-		'hoverpause'=>'true',
-		'effect'=>'random'
+		'startslide'=>'',
+		'animationspeed'=>'',
+		'imagepausetime'=>'',
+		'shownav'=>'',
+		'hoverpause'=>'',
+		'effect'=>''
 	),$atts));
 	
  	if(trim($name)=="")
@@ -240,14 +240,14 @@ function WPNewCarouselShortcode($atts){
 		if($carouselresults->ShowNav != "")
 			$shownav=$carouselresults->ShowNav;
 		else 
-			$shownav=true;
+			$shownav="true";
 	}		
 	
 	if(trim($hoverpause)=="" || !in_array(strtolower($hoverpause),$validarray)){
 		if($carouselresults->HoverPause != "")
 			$hoverpause=$carouselresults->HoverPause;
 		else
-			$hoverpause=true;
+			$hoverpause="true";
 	}
 	
 	if(trim($effect)=="" ||!in_array($effect,$effectsarray)){
