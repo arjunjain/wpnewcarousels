@@ -5,8 +5,8 @@ Donate link: http://www.arjunjain.info
 Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/  
 Tags: carousel, wordpress carousel,admin, plugin, multisite carousel,multisite,wordpress,slider
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.5
+Tested up to: 3.6.1
+Stable tag: 1.6
 
 This plugin is used to create the carousel that can be inserted to any wordpress page.
 
@@ -19,9 +19,12 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 * Support wordpress multisite setup
 * Manage carousel width,height,effects,speed,animation using short code or dashboard
 * Add multiple carousel on same page
+* Manage carousel slide order
 
 == Support ==
 
+* For critical issue related to functionality, create the new issue on [github](https://github.com/arjunjain/wpnewcarousels/issues)
+* Refer this [wiki](https://github.com/arjunjain/wpnewcarousels/wiki)
 * Fill up this [form](http://www.arjunjain.info/contact) to leave comments,ask question,suggest new feature or directly mail at arjun@arjunjain.info
 * For Demo [Click Here](http://www.arjunjain.info/demos/wpnewcarousel/)
 
@@ -32,6 +35,8 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 * Enable the plugin
 
 == Using the WPNewCarousels ==
+
+* You can refer [wiki](https://github.com/arjunjain/wpnewcarousels/wiki)
 
 * Add new carousel in wpnewcarousel settings page. 
 * Use shortcode on any wordpress page 
@@ -82,3 +87,7 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 * Change Carousel admin dashboard
 * Modify database structure
 * Provide support to add multiple carousel on same page
+
+= Version 1.6 (2013-09-16) =
+* Fix add new slide delete content of unsaved slide bug
+* Add manage carousel slide order functionality
