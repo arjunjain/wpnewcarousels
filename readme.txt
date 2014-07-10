@@ -5,8 +5,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=SQC4WR7X
 Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/  
 Tags: carousel, wordpress carousel, multisite carousel, multisite slider, wordpress slider, carousel plugin, wordpress carousel plugin
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 1.7
+Tested up to: 3.9.1
+Stable tag: 1.7.1
 
 This plugin is used to create the carousel that can be inserted to any wordpress page/post. This plugin also support Wordpress Multisite setup.
 
