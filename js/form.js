@@ -25,17 +25,6 @@ function addSlides(em,filepath){
 		});
 		return false;
 }
-jQuery(function(){
-    jQuery( ".draggable-listings tbody" ).sortable({
-		stop: function( event, ui ) {
-			jQuery("#slides-save-button").attr("disabled","true");
-			for(i = 0;i < jQuery(".slide-carousal").length;i++){
-				jQuery(jQuery(".slide-carousal")[i]).find(".position-fixer").attr("value",i);
-			}
-			jQuery("#slides-save-button").removeAttr("disabled");
-		}
-	});		
-});
 		
 function saveCarousalOrder(getPath){
 	var getCarosalId = jQuery(jQuery(".draggable-listings tbody tr")[0]).attr("class").split("-");
@@ -62,3 +51,20 @@ function saveCarousalOrder(getPath){
 		}
 	});
 }
+
+function removeimage(em){
+	jQuery(em).parent().parent().remove();
+}
+
+
+jQuery(function(){
+    jQuery( ".draggable-listings tbody" ).sortable({
+		stop: function( event, ui ) {
+			jQuery("#slides-save-button").attr("disabled","true");
+			for(i = 0;i < jQuery(".slide-carousal").length;i++){
+				jQuery(jQuery(".slide-carousal")[i]).find(".position-fixer").attr("value",i);
+			}
+			jQuery("#slides-save-button").removeAttr("disabled");
+		}
+	});		
+});

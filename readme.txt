@@ -1,17 +1,17 @@
 === WPNewCarousels ===
 Contributors: arjunjain08	
 Author URI: http://www.arjunjain.info
-Donate link: http://www.arjunjain.info
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=SQC4WR7X5JGDY&lc=IN&item_name=WPNewCarousels&button_subtype=services&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted
 Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/  
-Tags: carousel, wordpress carousel,admin, plugin, multisite carousel,multisite,wordpress,slider
+Tags: carousel, wordpress carousel, multisite carousel, multisite slider, wordpress slider, carousel plugin, wordpress carousel plugin
 Requires at least: 3.0
-Tested up to: 3.6.1
-Stable tag: 1.6
+Tested up to: 3.8.1
+Stable tag: 1.7
 
-This plugin is used to create the carousel that can be inserted to any wordpress page.
+This plugin is used to create the carousel that can be inserted to any wordpress page/post. This plugin also support Wordpress Multisite setup.
 
 == Description ==
-This plugin is used to create the carousel that can be inserted to any wordpress page. This plugin also support wordpress multisite setup.
+This plugin is used to create the carousel that can be inserted to any wordpress page/post. This plugin also support wordpress multisite setup.
 
 **Features**
 
@@ -63,31 +63,35 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 
 == Changelog == 
 
-= Version 1.0 (2012-1-6) =
-* Update readme.txt file.
+= Version 1.7 (2014-03-02) =
+* Add carousel slide delete button
+* Fix carousel slide update functionality
 
-= Version 1.1 (2012-3-5) =
-* Modify manage carousel class.
-* Fix dynamic path to stylesheet and script.
-
-= Version 1.2 (2012-3-28) =
-* Modify carousel short code.
-* Add startslide,animationspeed,imagepausetime,shownav,hoverpause parameter with carousel.
-* Add carousel button in default wordpress editor.
-
-= Version 1.3 (2012-4-5) =
-* Fix IE bugs.
-* Add effect parameter with carousel
-
-= Version 1.4 (2012-9-4) =
-* Integrate with wordpress media library, add new upload button with every background image url text box
-* Add few more checks with short code at backend to validate correctly.
+= Version 1.6 (2013-09-16) =
+* Fix add new slide delete content of unsaved slide bug
+* Add manage carousel slide order functionality
 
 = Version 1.5 (2012-12-21) =
 * Change Carousel admin dashboard
 * Modify database structure
 * Provide support to add multiple carousel on same page
 
-= Version 1.6 (2013-09-16) =
-* Fix add new slide delete content of unsaved slide bug
-* Add manage carousel slide order functionality
+= Version 1.4 (2012-9-4) =
+* Integrate with wordpress media library, add new upload button with every background image url text box
+* Add few more checks with short code at backend to validate correctly.
+
+= Version 1.3 (2012-4-5) =
+* Fix IE bugs.
+* Add effect parameter with carousel
+
+= Version 1.2 (2012-3-28) =
+* Modify carousel short code.
+* Add startslide,animationspeed,imagepausetime,shownav,hoverpause parameter with carousel.
+* Add carousel button in default wordpress editor.
+
+= Version 1.1 (2012-3-5) =
+* Modify manage carousel class.
+* Fix dynamic path to stylesheet and script.
+
+= Version 1.0 (2012-1-6) =
+* Update readme.txt file.

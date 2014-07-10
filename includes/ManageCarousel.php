@@ -35,17 +35,18 @@ class ManageCarousel{
 					Select Carousel :<select name="carouselid">';
 		$html .=$this->GetOptionsString($query,"Id","CarouselName",@$_POST['carouselid']);	
 	 	$html .='</select>
-				<input type="submit" class="button" name="addupdatesubmit" value="Add/Update Slides"></form>
+				<input type="submit" class="button" name="addupdatesubmit" value="Add/Edit Slides"></form>
 				</div>';
 		if(isset($_POST['addupdatesubmit'])){
 				$html .='<form name="addcarouseldata" method="POST" action="" >
 						<table class="wp-list-table widefat fixed posts draggable-listings" cellspacing="0">
 						<thead>
 							<tr>
-								<th class="manage-column column-title" scope="col" >Background Image URL</th>
-								<th class="manage-column column-title" scope="col">Background Image href link</th>
-								<th class="manage-column column-title" scope="col">Background Image Alt Text</th>
-								<th class="manage-column column-title" scope="col">Background Image Title</th>
+								<th class="manage-column column-title" scope="col" >Image URL*</th>
+								<th class="manage-column column-title" scope="col">Image link</th>
+								<th class="manage-column column-title" scope="col">Image Alt Text</th>
+								<th class="manage-column column-title" scope="col">Image Title</th>
+								<th style="width:26px;"></th>
 							</tr>
 						</thead>
 						<tbody id="ajaxslide">';
@@ -64,16 +65,16 @@ class ManageCarousel{
 			$html .='</tbody>
 					 <tfoot>
 						<tr>
-							<th colspan="4" class="manage-column column-title"  scope="col">
-								<input type="hidden" name="carouselid" value="'.$carouselid.'"><input type="submit" class="button" style="padding:3px 8px;" name="saveCarousel" value="Save" id="slides-save-button"/></form>
-								or 
+							<th colspan="5" class="manage-column column-title"  scope="col">
+								<input type="hidden" name="carouselid" value="'.$carouselid.'"><input type="submit" class="button" style="padding:3px 8px;" name="saveCarousel" value="Save Slides" id="slides-save-button"/>
+								</form>
 								<form style="display:inline;" name="addmoreslideform" method="POST" onsubmit="return addSlides(this,\''.plugins_url('includes/DisplaySlides.php',dirname(__FILE__)).'\');">
-					 				<input type="text" value="1" maxlength="1" size="1" name="numberofslideadd"  style="height:24px; width:30px; text-align:center">
-									<input type="submit" class="button" style="padding:3px 8px;" name="addmoreslides" value="Add" />
+					 				<input type="text" value="1" maxlength="1" size="1" name="numberofslideadd"  style="height:28px; width:30px; text-align:center">
+									<input type="submit" class="button" style="padding:3px 8px;" name="addmoreslides" value="Add More Slides" />
 								</form>
 							</th>
 						</tr>
-						<tr><td colspan="4"><p><img title="" src="'.plugins_url('images/hand.jpeg',dirname(__FILE__)).'" /><small>drag the rows to update the slider order (Supported in IE9+, FF, Crome, Safari)</small></p></td></tr>
+						<tr><td colspan="5"><p><img title="" src="'.plugins_url('images/hand.jpeg',dirname(__FILE__)).'" /><small>drag the rows to update the carousel slide order (Supported in IE9+, FF, Crome, Safari)</small></p></td></tr>
 					</tfoot>
 				</table>';
 		}
@@ -86,15 +87,18 @@ class ManageCarousel{
 	 */
 	public function getInitialSLides($number)
 	{
-		$html = '<tr valign="top" class="slide-carousal carousal-id-" id="slide-'.$number.'">
-		<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageURL[]" value="'.@addslashes($postdata['BackgroundImageURL']).'" class="uploadurl" />
-		<input class="button upload_image_button" type="button" value="Select Image" /></td>
-		<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageLink[]" value="'.@addslashes($postdata['BackgroundImageLink']).'" /></td>
-		<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageAltText[]" value="'.@addslashes($postdata['BackgroundImageAltText']).'" /></td>
-		<td class="title column-title"><input style="width:100%" type="text" name="TitleText[]" value="'.@addslashes($postdata['TitleText']).'" />
-		<input type="hidden" name="Id[]" value="" class="row-id" />
-		<input type="hidden" name="position[]" value="'.$number.'" class="position-fixer" /></td>
-		</tr>';
+		$html = '<tr valign="top" class="slide-carousal carousal-id-" style="cursor:grab;" id="slide-'.$number.'">
+					<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageURL[]" value="'.@addslashes($postdata['BackgroundImageURL']).'" class="uploadurl" />
+						<input class="button upload_image_button" type="button" value="Select Image" />
+					</td>
+					<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageLink[]" value="'.@addslashes($postdata['BackgroundImageLink']).'" /></td>
+					<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageAltText[]" value="'.@addslashes($postdata['BackgroundImageAltText']).'" /></td>
+					<td class="title column-title"><input style="width:100%" type="text" name="TitleText[]" value="'.@addslashes($postdata['TitleText']).'" />
+						<input type="hidden" name="Id[]" value="" class="row-id" />
+						<input type="hidden" name="position[]" value="'.$number.'" class="position-fixer" />
+					</td>
+					<td style="width:25px;"><img src="'.plugins_url('images/remove.png',dirname(__FILE__)).'" onclick="return removeimage(this);" style="cursor:pointer;"/></td>
+				</tr>';
 		return $html;
 	}
 	
@@ -103,14 +107,17 @@ class ManageCarousel{
 	 * @param array $post_data
 	 */
 	public function getSlide($postdata=array()){
-		$html = '<tr valign="top" class="slide-carousal carousal-id-'.@$postdata['CarouselId'].'" id="slide-'.@$postdata['Id'].'">
+		$html = '<tr valign="top" style="cursor:grab;" class="slide-carousal carousal-id-'.@$postdata['CarouselId'].'" id="slide-'.@$postdata['Id'].'">
 					<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageURL[]" value="'.@addslashes($postdata['BackgroundImageURL']).'" class="uploadurl" />
-					<input class="button upload_image_button" type="button" value="Select Image" /></td>
+						<input class="button upload_image_button" type="button" value="Select Image" />
+					</td>
 			  		<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageLink[]" value="'.@addslashes($postdata['BackgroundImageLink']).'" /></td>
 			  		<td class="title column-title"><input style="width:100%" type="text" name="BackgroundImageAltText[]" value="'.@addslashes($postdata['BackgroundImageAltText']).'" /></td>
 			  		<td class="title column-title"><input style="width:100%" type="text" name="TitleText[]" value="'.@addslashes($postdata['TitleText']).'" />
-			  		<input type="hidden" name="Id[]" value="'.@$postdata['Id'].'" />
-					<input type="hidden" name="position[]" value="'.@$postdata['weight'].'" class="position-fixer" /></td>
+			  			<input type="hidden" name="Id[]" value="'.@$postdata['Id'].'" />
+						<input type="hidden" name="position[]" value="'.@$postdata['weight'].'" class="position-fixer" />
+					</td>
+					<td style="width:25px;"><img src="'.plugins_url('images/remove.png',dirname(__FILE__)).'" onclick="return removeimage(this);"  style="cursor:pointer;" /></td>
 			  	</tr>';
 		return $html;
 	}
@@ -169,9 +176,9 @@ class ManageCarousel{
 	 * @param int $Id
 	 * @since 1.5
 	 */
-	public function DeleteCarouselSlides($Id){
+	public function DeleteCarouselSlides($Ids){
 		try{		
-			$this->_DataObject->query($this->_DataObject->prepare("DELETE FROM {$this->_carouselData} WHERE Id = %d",$Id));
+			$this->_DataObject->query("DELETE FROM {$this->_carouselData} WHERE Id IN ('".join("','", $Ids)."')");
 		}
 		catch(Exception $e){
 			echo "Error: ".$e->getMessage();
@@ -303,7 +310,7 @@ class ManageCarousel{
 		$html='<div class="wrap">
 					<div style="width:32px; float:left;height:32px; margin:7px 8px 0 0;"><img src="'.plugins_url('images/32_carousel.png',dirname(__FILE__)).'" /></div>
 			   		<h2>Add New Carousel</h2>'.$errormsg.'
-			   		<div  style="margin-top:10px;" class="sidebar-name no-movecursor"><h3>Carousel settings</h3></div>
+			   		<div  style="margin-top:10px;" class="sidebar-name no-movecursor"></div>
 						<div class="popover-holder">			   		
 		   				<form action="'.esc_attr($_SERVER['REQUEST_URI']).'" method="POST" name="carouselform">
 							<input type="hidden" name="carouselid" value="'.@$postdata['carouselid'].'" />
@@ -368,7 +375,7 @@ class ManageCarousel{
 									</th>
 								</tr>
 								<tr>
-									<th scope="row"><label for="hoverpause">Carouse Pause on mouse over</label></th>
+									<th scope="row"><label for="hoverpause">Carousel Pause on mouse over</label></th>
 									<th>
 										<select name="hoverpause">';
 				foreach ($truefalse as $key=>$value){

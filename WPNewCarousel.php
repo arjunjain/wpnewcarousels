@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/
 Description: Provide functionality to create carousel that can be inserted to any wordpress page.
 Author: Arjun Jain
 Author URI: http://www.arjunjain.info
-Version: 1.6
+Version: 1.7
 */
 
 global $wpnewcarousel_db_version;
@@ -19,7 +19,7 @@ $olderversion=get_option('wpnewcarousel_db_version');   // find current version 
 require_once 'includes/ManageCarousel.php';
 add_action('admin_menu', 'WPNewCarousels');
 function WPNewCarousels() {
-	add_menu_page('WPNewCarousels - Add new carousel','Add carousel', 'administrator', 'add-new-wpnewcarousel', 'AddWPNewCarousel',plugins_url('images/16_carousel.png',__FILE__),'81');
+	add_menu_page('WPNewCarousels - Add new carousel','Add carousel', 'administrator', 'add-new-wpnewcarousel', 'AddWPNewCarousel',plugins_url('images/16_carousel.png',__FILE__));
 	add_submenu_page('add-new-wpnewcarousel','Manage Carousels','All Carousels','administrator','list-all-wpnewcarousel','AdminWPNewCarousels');
 	add_submenu_page('add-new-wpnewcarousel','Manage Slides','Add Slides','administrator','wpnewcarousel-add-image','WPNewCarouselAddImages');
 }
@@ -79,9 +79,9 @@ function AddWPNewCarousel(){
 		if($errormsg=="valid"){
 			$mcObject->InsertNewCarousel($postdata);
 			if($postdata['carouselid']=='')
-				$errormsg='<div class="updated"><p>Carousel Added</p></div>';
+				$errormsg='<div class="updated"><p>Carousel Added Successfully.</p></div>';
 			else
-				$errormsg='<div class="updated"><p>Carousel Updated</p></div>';
+				$errormsg='<div class="updated"><p>Carousel Updated Successfully.</p></div>';
 			$html .= $mcObject->DisplayAddNewCarousel(array(),$errormsg);
 		}
 		else{
@@ -131,22 +131,34 @@ function WPNewCarouselAddImages(){
 			$BackgroudImageAltText=$_POST['BackgroundImageAltText'];
 			$TitleText=$_POST['TitleText'];
 			$slideDisplayOrder = $_POST['position'];
-			
+			$allids=array();
+			$previous_slides=$mcObject->GetCarouselDataById($carouselId);
+			if(sizeof($previous_slides) > 0){
+				foreach ($previous_slides as $slides){
+					array_push($allids,$slides->Id);	
+				}
+			}
 			for($i=0;$i<sizeof($Id);$i++){
 				if($Id[$i] !=""){
-					// update 
-					if(trim($BackgroundImageURL[$i])=="")  // delete carousel if image url if empty
-						$mcObject->DeleteCarouselSlides($Id[$i]);
-					else
-						$mcObject->UpdateCarouselSlides($Id[$i], $carouselId, trim($BackgroundImageURL[$i]), trim($BackgroundImageLink[$i]), trim($BackgroudImageAltText[$i]), trim($TitleText[$i]), $slideDisplayOrder[$i]);
+					if(in_array($Id[$i],$allids)){
+						if(($key = array_search($Id[$i],$allids )) !== false) {
+ 					   		unset($allids[$key]);
+						}
+					}
+					$mcObject->UpdateCarouselSlides($Id[$i], $carouselId, trim($BackgroundImageURL[$i]), trim($BackgroundImageLink[$i]), trim($BackgroudImageAltText[$i]), trim($TitleText[$i]), $slideDisplayOrder[$i]);
 				}
 				else{
 					//add
 					if(trim($BackgroundImageURL[$i])!="")
 						$mcObject->InsertCarouselSlides($carouselId, trim($BackgroundImageURL[$i]),trim($BackgroundImageLink[$i]),trim($BackgroudImageAltText[$i]), trim($TitleText[$i]), $slideDisplayOrder[$i]);		
-				}
+				}				
 			}	
-			$msg='<div class="updated"><p>Carousel Updated</a></p></div>';
+			
+			// remove deleted ids
+			if(sizeof($allids) > 0){
+				$mcObject->DeleteCarouselSlides($allids);
+			}
+			$msg='<div class="updated"><p>Carousel Updated Successfully</a></p></div>';
 		}
 		echo $mcObject->DisplayCarouselSlides($msg);
 	}
