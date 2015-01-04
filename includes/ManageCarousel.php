@@ -233,8 +233,8 @@ class ManageCarousel{
 						<tr>
 							<th class="manage-column column-author" scope="col">Carousel Name</th>
 							<th class="manage-column column-comments" scope="col"></th>
-							<th class="manage-column column-author" scope="col">Carousel Width</th>
-							<th class="manage-column column-author" scope="col">Carousel Height</th>
+							<th class="manage-column column-author" scope="col">Carousel Max Width</th>
+							<th class="manage-column column-author" scope="col">Carousel Max Height</th>
 							<th class="manage-column column-author" scope="col">Carousel Effect</th>
 							<th class="manage-column column-author" scope="col">Animation speed</th>
 							<th class="manage-column column-author" scope="col">Pause time</th>
@@ -322,11 +322,11 @@ class ManageCarousel{
 			  						<th><input type="text" id="carouselname" name="carouselname" value="'.@$postdata['carouselname'].'" class="regular-text" /></th>
 			  					</tr>
 			  					<tr>
-			  						<th scope="row"><label for="carouselwidth" >Carousel Width*</label></th>
+			  						<th scope="row"><label for="carouselwidth" >Carousel Max Width*</label></th>
 			  						<th><input type="text" id="carouselwidth" name="carouselwidth" value="'.@$postdata['carouselwidth'].'" class="small-text" />px</th>
 			  					</tr>
 								<tr>
-			  						<th scope="row"><label for="carouselheight" >Carousel Height*</label></th>
+			  						<th scope="row"><label for="carouselheight" >Carousel Max Height*</label></th>
 			  						<th><input type="text" id="carouselheight" name="carouselheight" value="'.@$postdata['carouselheight'].'" class="small-text" />px</th>
 			  					</tr>			
 			  					<tr>

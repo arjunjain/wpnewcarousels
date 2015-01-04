@@ -2,10 +2,12 @@
 /*
 Plugin Name: WPNewCarousels
 Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/
-Description: Provide functionality to create carousel that can be inserted to any wordpress page.
+Description: Provide functionality to create responsive carousel that can be inserted to any wordpress page.
 Author: Arjun Jain
 Author URI: http://www.arjunjain.info
-Version: 1.7
+Version: 1.8
+Text Domain: wpnewcarousels
+License: GPL v3
 */
 
 global $wpnewcarousel_db_version;
@@ -274,7 +276,7 @@ function WPNewCarouselShortcode($atts){
 	if(sizeof($carouseldata)>0){
 			$output = '<script type="text/javascript">
 					     jQuery(document).ready(function() {
-			       			 jQuery(".nivoSlider'.$i.'").nivoSlider({
+			       			 jQuery("#nivoSlider'.$i.'").nivoSlider({
 			       			 	effect:	"'.$effect.'",  
 			    				startSlide:'.$startslide.', 
 			        			animSpeed:'.$animationspeed.',
@@ -282,18 +284,18 @@ function WPNewCarouselShortcode($atts){
 			    				controlNav:'.$shownav.', 
 			    				pauseOnHover:'.$hoverpause.'     	
 			        		});
-					    });
-					</script>';
-			
-			$output .= '<div class="nivoSlider'.$i.'" style="width:'.$width.'px; height:'.$height.'px;" >';
+					     });
+					    </script>';
+			$output .= '<div class="wpnewcarousels-slider" style="max-width:'.$width.'px;max-height:'.$height.'px">';
+			$output .= '<div class="nivoSlider" id="nivoSlider'.$i.'">';
 			foreach ($carouseldata as $result){
 				if($result->BackgroundImageLink != "")
 					$output .='<a href="'.$result->BackgroundImageLink.'" >';
-				$output .='<img src="'.$result->BackgroundImageURL.'"  width="'.$width.'" height="'.$height.'"  alt="'.$result->BackgroundImageAltText.'" title="'.$result->TitleText.'" >';
+				$output .='<img src="'.$result->BackgroundImageURL.'" data-thumb="'.$result->BackgroundImageURL.'"  alt="'.$result->BackgroundImageAltText.'" title="'.$result->TitleText.'" >';
 				if($result->BackgroundImageLink != "")
 					$output .='</a>';
 			}
-			$output .= '</div>';
+			$output .= '</div></div>';
 	}
 	$i++;
 	return $output;
@@ -316,10 +318,7 @@ function wpnewcarousel_script() {
 	wp_enqueue_script('wpnewcarousel_script');	
 }
 function WPNewCarousel_Styles() {
-	wp_enqueue_style( 'WPNewCarousel_Styles',
-			path_join( WP_PLUGIN_URL,
-					basename( dirname( __FILE__ ) ) .
-					'/css/carousel.css' ));
+	wp_enqueue_style( 'WPNewCarousel_Styles',path_join( WP_PLUGIN_URL,basename( dirname( __FILE__ ) ) .'/css/carousel.css' ));
 }
 
 /**

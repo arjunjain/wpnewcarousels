@@ -3,18 +3,19 @@ Contributors: arjunjain08
 Author URI: http://www.arjunjain.info
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=SQC4WR7X5JGDY&lc=IN&item_name=WPNewCarousels&button_subtype=services&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted
 Plugin URI: http://wordpress.org/extend/plugins/wpnewcarousels/  
-Tags: carousel, wordpress carousel, multisite carousel, multisite slider, wordpress slider, carousel plugin, wordpress carousel plugin
+Tags: slider, carousel, responsive slider,responsive carousel, wordpress carousel, multisite carousel, multisite slider, wordpress slider, carousel plugin, wordpress carousel plugin
 Requires at least: 3.0
-Tested up to: 3.9.1
-Stable tag: 1.7
+Tested up to: 4.1
+Stable tag: 1.8
 
-This plugin is used to create the carousel that can be inserted to any wordpress page/post. This plugin also support Wordpress Multisite setup.
+This plugin is used to create the responsive carousel that can be inserted to any wordpress page/post. This plugin also support Wordpress Multisite setup.
 
 == Description ==
-This plugin is used to create the carousel that can be inserted to any wordpress page/post. This plugin also support wordpress multisite setup.
+This plugin is used to create the responsive carousel that can be inserted to any wordpress page/post. This plugin also support wordpress multisite setup.
 
 **Features**
 
+* Responsive carousel
 * wpnewcarousel button added to your default editor
 * Support wordpress multisite setup
 * Manage carousel width,height,effects,speed,animation using short code or dashboard
@@ -26,7 +27,7 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 * For critical issue related to functionality, create the new issue on [github](https://github.com/arjunjain/wpnewcarousels/issues)
 * Refer this [wiki](https://github.com/arjunjain/wpnewcarousels/wiki)
 * Fill up this [form](http://www.arjunjain.info/contact) to leave comments,ask question,suggest new feature or directly mail at arjun@arjunjain.info
-* For Demo [Click Here](http://www.arjunjain.info/demos/wpnewcarousel/)
+* For Demo [Click Here](http://www.arjunjain.info/wpnewcarousels/)
 
 == Installation ==
 
@@ -62,6 +63,8 @@ This plugin is used to create the carousel that can be inserted to any wordpress
 4. Add carousel data
 
 == Changelog == 
+= Version 1.8 (2015-01-04) =
+* Add responsive support to carousel
 
 = Version 1.7 (2014-03-02) =
 * Add carousel slide delete button
