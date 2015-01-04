@@ -21,6 +21,7 @@ This plugin is used to create the responsive carousel that can be inserted to an
 * Manage carousel width,height,effects,speed,animation using short code or dashboard
 * Add multiple carousel on same page
 * Manage carousel slide order
+* For Demo [Click Here](http://www.arjunjain.info/wpnewcarousels/)
 
 == Support ==
 
